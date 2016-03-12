@@ -1,5 +1,7 @@
 #include <iostream>	
-#include "Header.cpp"
+#include "Pieces.h"
+#include "Boards.h"
+#include "Cells.h"
 using namespace std;
 
 int main()

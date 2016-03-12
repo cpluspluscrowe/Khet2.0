@@ -1,7 +1,7 @@
-#include "Cell.h"
+#include "Cells.h"
 #include <cstddef>
 
-Cell::Cell(Piece piece, int row, int col)
+Cell::Cell(Piece * piece, int row, int col)
 {
 	setPiece(piece);
 	setRow(row);
@@ -37,15 +37,18 @@ bool Cell::contains_piece() const
 		return true;
 	}
 }
-void Cell::setPiece(Piece &piece)
+void Cell::setPiece(Piece * pieceP)
 {
-	piece = piece;
-}
-void Cell::setPiece(Piece * piece)
-{
-	piece = nullptr;
+	if (pieceP == nullptr)
+	{
+		piece = nullptr;
+	} else
+	{
+		piece = pieceP;
+	}
+	
 }
 Piece Cell::getPiece() const
 {
-	return piece;
+	return *piece;
 }
