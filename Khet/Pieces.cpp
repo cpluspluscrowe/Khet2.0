@@ -24,11 +24,22 @@ void Side::set_reflect_dir(const Reflected &dir)
 /*
 Piece class implementation
 */
-Piece::Piece(int posx, int posy)
+Piece::Piece()
 {
-	setxpos(posx);
-	setypos(posy);
+	//do nothing, this will be a nullptr in a cell
+}
+Piece::Piece(Color color)
+{
+	setColor(color);
 };
+Color Piece::getColor() const
+{
+	return color;
+}
+void Piece::setColor(Color color)
+{
+	color = color;
+}
 void Piece::move(int dy, int dx)
 {
 	posy += dy;
@@ -45,14 +56,6 @@ int Piece::getxpos() const
 int Piece::getypos() const
 {
 	return posy;
-};
-void Piece::setxpos(int x)
-{
-	posx = x;
-};
-void Piece::setypos(int y)
-{
-	posy = y;
 };
 void Piece::setRotation(int x)
 {
@@ -71,6 +74,16 @@ Type Side::get_surface() const
 /*
 Scarab class implementation
 */
+Scarab::Scarab(Color color, int rotation) :Piece(color){
+	Side top(Type::mirror, Reflected::rright);
+	Side right(Type::mirror, Reflected::rup);
+	Side left(Type::mirror, Reflected::rdown);
+	Side bottom(Type::mirror, Reflected::rleft);
+	if (rotation == 1)
+	{
+		rotate(top, right, bottom, left);
+	}
+}
 void Scarab::rotate(Side &top, Side &right, Side &bottom, Side &left)
 {
 	top.set_reflect_dir(get_opposite_reflected(top));
@@ -95,20 +108,10 @@ Reflected Scarab::get_opposite_reflected(Side &current) const
 		return Reflected::rleft;
 	}
 }
-Scarab::Scarab(int x, int y, int rotation) :Piece(x, y){
-	Side top(Type::mirror, Reflected::rright);
-	Side right(Type::mirror, Reflected::rup);
-	Side left(Type::mirror, Reflected::rdown);
-	Side bottom(Type::mirror, Reflected::rleft);
-	if (rotation == 1)
-	{
-		rotate(top, right, bottom, left);
-	}
-}
 /*
 Pyramid class implementation
 */
-Pyramid::Pyramid(int x, int y, int rotation) :Piece(x, y){
+Pyramid::Pyramid(Color color, int rotation) :Piece(color){
 	Side top(Type::mirror, Reflected::rright);
 	Side right(Type::mirror, Reflected::rup);
 	Side left(Type::unprotected, Reflected::rnone);
@@ -186,7 +189,7 @@ void Pyramid::rotate_cw(Side &top, Side &right, Side &bottom, Side &left)
 /*
 Pharaoh class implementation
 */
-Pharaoh::Pharaoh(int x, int y) :Piece(x, y){
+Pharaoh::Pharaoh(Color color) :Piece(color){
 	Side top(Type::unprotected, Reflected::rnone);
 	Side right(Type::unprotected, Reflected::rnone);
 	Side left(Type::unprotected, Reflected::rnone);
@@ -196,7 +199,7 @@ Pharaoh::Pharaoh(int x, int y) :Piece(x, y){
 /*
 Anubis class implementation
 */
-Anubis::Anubis(int x, int y, int rotation) :Piece(x, y){
+Anubis::Anubis(Color color, int rotation) :Piece(color){
 	Side top(Type::blocker, Reflected::rright);
 	Side right(Type::unprotected, Reflected::rup);
 	Side left(Type::unprotected, Reflected::rdown);

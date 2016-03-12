@@ -1,5 +1,6 @@
 enum class Type { mirror = 0, unprotected, blocker };
 enum class Reflected { rup = 0, rright, rdown, rleft, rnone };
+enum class Color {red, gray};
 
 /*
 Side class.  
@@ -20,18 +21,20 @@ private:
 
 class Piece {
 public:
-	Piece(int posx, int posy);
+	Piece(Color color);
+	Piece();
 	void move(int dy, int dx);
 	bool isHit(int dir);
 	int getxpos() const;
 	int getypos() const;
-	void setxpos(int x);
-	void setypos(int y);
 	void setRotation(int x);
+	Color getColor() const;
+	void setColor(Color color);
 private:
 	int posx;
 	int posy;
 	int rotation;
+	Color color;
 };
 /*
 Scarab Class
@@ -39,7 +42,7 @@ Scarab Class
 class Scarab : Piece
 {
 public:
-	Scarab(int x, int y, int rotation);
+	Scarab(Color color, int rotation);
 	void Scarab::rotate(Side &top, Side &right, Side &bottom, Side &left);
 	Reflected Scarab::get_opposite_reflected(Side &current) const;
 private:
@@ -50,7 +53,7 @@ Pyramid class
 class Pyramid : Piece
 {
 public:
-	Pyramid(int x, int y, int rotation);
+	Pyramid(Color color, int rotation);
 	void rotate_cc(Side &top, Side &right, Side &bottom, Side &left);
 	void rotate_cw(Side &top, Side &right, Side &bottom, Side &left);
 private:
@@ -61,7 +64,7 @@ Pharaoh class
 class Pharaoh : Piece
 {
 public:
-	Pharaoh(int x, int y);
+	Pharaoh(Color color);
 private:
 };
 /*
@@ -70,6 +73,6 @@ Anubis class
 class Anubis : Piece
 {
 public:
-	Anubis(int x, int y, int rotation);
+	Anubis(Color color, int rotation);
 private:
 };
