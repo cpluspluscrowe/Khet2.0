@@ -1,4 +1,3 @@
-#include "Cells.h"
 #include "Boards.h"
 
 Cell Board::get_cell(int row, int col)
