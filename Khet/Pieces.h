@@ -39,7 +39,7 @@ private:
 /*
 Scarab Class
 */
-class Scarab : Piece
+class Scarab : public Piece
 {
 public:
 	Scarab(Color color, int rotation);
@@ -50,7 +50,7 @@ private:
 /*
 Pyramid class
 */
-class Pyramid : Piece
+class Pyramid : public Piece
 {
 public:
 	Pyramid(Color color, int rotation);
@@ -61,7 +61,7 @@ private:
 /*
 Pharaoh class
 */
-class Pharaoh : Piece
+class Pharaoh : public Piece
 {
 public:
 	Pharaoh(Color color);
@@ -70,7 +70,7 @@ private:
 /*
 Anubis class
 */
-class Anubis : Piece
+class Anubis : public Piece
 {
 public:
 	Anubis(Color color, int rotation);

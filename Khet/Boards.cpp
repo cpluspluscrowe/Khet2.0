@@ -12,6 +12,6 @@ void Board::setup_board(GameType gametype)
 {
 	if (gametype == GameType::classic)
 	{
-		
+		set_cell(0, 0, Cell(dynamic_cast<Piece*>(&Scarab(Color::red,0)), 0, 0));
 	}
 }
