@@ -36,7 +36,7 @@ void Board::setup_board(GameType gametype)
 		set_cell(0, 7, Cell(dynamic_cast<Piece*>(&Pyramid(Color::red, 1)), 0, 7));
 		set_cell(5, 6, Cell(dynamic_cast<Piece*>(&Pyramid(Color::red, 1)), 5, 6));
 		set_cell(0, 5, Cell(dynamic_cast<Piece*>(&Pharaoh(Color::red)), 0, 5));
-		set_cell(0, 4, Cell(dynamic_cast<Piece*>(&Anubis(Color::red, 1)), 0, 4));
-		set_cell(0, 6, Cell(dynamic_cast<Piece*>(&Anubis(Color::red, 0)), 0, 6));
+		set_cell(0, 4, Cell(dynamic_cast<Piece*>(&Anubis(Color::red, 2)), 0, 4));
+		set_cell(0, 6, Cell(dynamic_cast<Piece*>(&Anubis(Color::red, 2)), 0, 6));
 	}
 }

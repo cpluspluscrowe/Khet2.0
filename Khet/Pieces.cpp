@@ -35,12 +35,32 @@ Piece class implementation
 */
 Piece::Piece(Color color)
 {
+	top = nullptr;
+	right = nullptr;
+	bottom = nullptr;
+	left = nullptr;
 	setColor(color);
 };
 Piece::Piece()
 {
 	//do nothing
 };
+Side* Piece::get_top()
+{
+	return top;
+}
+Side* Piece::get_right()
+{
+	return right;
+}
+Side* Piece::get_bottom()
+{
+	return bottom;
+}
+Side* Piece::get_left()
+{
+	return left;
+}
 Color Piece::getColor() const
 {
 	return color;
@@ -69,10 +89,10 @@ Scarab::Scarab(Color color, int rotation) : Piece(color) {
 	setColor(color);
 	if (rotation == 1)
 	{
-		rotate(top, right, bottom, left);
+		rotate_cw(top, right, bottom, left);
 	}
 }
-void Scarab::rotate(Side &top, Side &right, Side &bottom, Side &left)
+void Scarab::rotate_cw(Side &top, Side &right, Side &bottom, Side &left)
 {
 	top.set_reflect_dir(get_opposite_reflected(top));
 	right.set_reflect_dir(get_opposite_reflected(top));
@@ -96,6 +116,12 @@ Reflected Scarab::get_opposite_reflected(Side &current) const
 		return Reflected::rleft;
 	}
 }
+void Scarab::rotate_ccw(Side &top, Side &right, Side &bottom, Side &left)
+{
+	void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left);
+	void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left);
+	void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left);
+}
 /*
 Pyramid class implementation
 */
@@ -107,17 +133,17 @@ Pyramid::Pyramid(Color color, int rotation) : Piece(color){
 	setColor(color);
 	if (rotation == 1)
 	{
-		rotate_cc(top, right, bottom, left);
+		rotate_ccw(top, right, bottom, left);
 	} else if (rotation == 2)
 	{
-		rotate_cc(top, right, bottom, left);
-		rotate_cc(top, right, bottom, left);
+		rotate_ccw(top, right, bottom, left);
+		rotate_ccw(top, right, bottom, left);
 	} else if (rotation == 3)
 	{
 		rotate_cw(top, right, bottom, left); //Note rotates clockwise, not counterclockwise like the above two!
 	}
 }
-void Pyramid::rotate_cc(Side &top, Side &right, Side &bottom, Side &left)
+void Pyramid::rotate_cw(Side &top, Side &right, Side &bottom, Side &left)
 {
 	if (top.get_reflect_dir() == Reflected::rright && right.get_reflect_dir() == Reflected::rup && 
 		bottom.get_surface() == Type::unprotected && left.get_surface() == Type::unprotected)
@@ -169,11 +195,11 @@ void Pyramid::rotate_cc(Side &top, Side &right, Side &bottom, Side &left)
 		cout << "Error with rotating Pyramid piece!";
 	}
 }
-void Pyramid::rotate_cw(Side &top, Side &right, Side &bottom, Side &left)
+void Pyramid::rotate_ccw(Side &top, Side &right, Side &bottom, Side &left)
 {
-	rotate_cc(top, right, bottom, left);
-	rotate_cc(top, right, bottom, left);
-	rotate_cc(top, right, bottom, left);
+	rotate_cw(top, right, bottom, left);
+	rotate_cw(top, right, bottom, left);
+	rotate_cw(top, right, bottom, left);
 }
 /*
 Pharaoh class implementation
@@ -195,10 +221,10 @@ Anubis::Anubis(Color color, int rotation) : Piece(color){
 	Side bottom(Type::unprotected, Reflected::rleft);
 	for (int i = 0; i < rotation; i++)
 	{
-		rotatecw(top, right, bottom, left);
+		rotate_cw(top, right, bottom, left);
 	}
 }
-void Anubis::rotatecw(Side &top, Side &right, Side &bottom, Side &left)
+void Anubis::rotate_cw(Side &top, Side &right, Side &bottom, Side &left)
 {
 	if (top.get_surface() == Type::blocker)
 	{
@@ -220,9 +246,9 @@ void Anubis::rotatecw(Side &top, Side &right, Side &bottom, Side &left)
 		top.set_surface(Type::blocker);
 	}
 }
-void Anubis::rotateccw(Side &top, Side &right, Side &bottom, Side &left)
+void Anubis::rotate_ccw(Side &top, Side &right, Side &bottom, Side &left)
 {
-	rotatecw(top, right, bottom, left);
-	rotatecw(top, right, bottom, left);
-	rotatecw(top, right, bottom, left);
+	rotate_cw(top, right, bottom, left);
+	rotate_cw(top, right, bottom, left);
+	rotate_cw(top, right, bottom, left);
 }

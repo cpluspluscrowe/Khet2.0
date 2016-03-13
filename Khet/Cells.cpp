@@ -29,7 +29,7 @@ Cell::Cell()
 }
 bool Cell::contains_piece() const
 {
-	if (&getPiece() == nullptr)
+	if (getPiece() == nullptr)
 	{
 		return false;
 	} else
@@ -48,7 +48,7 @@ void Cell::setPiece(Piece * pieceP)
 	}
 	
 }
-Piece Cell::getPiece() const
+Piece* Cell::getPiece() const
 {
-	return *piece;
+	return piece;
 }

@@ -8,7 +8,7 @@ public:
 	Cell();
 	bool contains_piece() const;
 	void setPiece(Piece * piece);
-	Piece getPiece() const;
+	Piece* getPiece() const;
 	void setRow(int row);
 	void setCol(int col);
 	int getRow() const;

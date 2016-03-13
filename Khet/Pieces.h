@@ -27,7 +27,17 @@ public:
 	bool isHit(int dir);
 	Color getColor() const;
 	void setColor(Color color);
+	virtual void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left) = 0;
+	virtual void rotate_cw(Side &top, Side &right, Side &bottom, Side &left) = 0;
+	Side* get_top();
+	Side* get_right();
+	Side* get_bottom();
+	Side* get_left();
 private:
+	Side *top;
+	Side *right;
+	Side *bottom;
+	Side *left;
 	Color color;
 };
 /*
@@ -37,8 +47,9 @@ class Scarab : public Piece
 {
 public:
 	Scarab(Color color, int rotation);
-	void Scarab::rotate(Side &top, Side &right, Side &bottom, Side &left);
-	Reflected Scarab::get_opposite_reflected(Side &current) const;
+	void rotate_cw(Side &top, Side &right, Side &bottom, Side &left) override;
+	void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left) override;
+	Reflected get_opposite_reflected(Side &current) const;
 private:
 };
 /*
@@ -48,8 +59,8 @@ class Pyramid : public Piece
 {
 public:
 	Pyramid(Color color, int rotation);
-	void rotate_cc(Side &top, Side &right, Side &bottom, Side &left);
-	void rotate_cw(Side &top, Side &right, Side &bottom, Side &left);
+	void rotate_cw(Side &top, Side &right, Side &bottom, Side &left) override;
+	void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left) override;
 private:
 };
 /*
@@ -59,6 +70,8 @@ class Pharaoh : public Piece
 {
 public:
 	Pharaoh(Color color);
+	void rotate_cw(Side &top, Side &right, Side &bottom, Side &left) override{};
+	void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left) override{};
 private:
 };
 /*
@@ -68,7 +81,7 @@ class Anubis : public Piece
 {
 public:
 	Anubis(Color color, int rotation);
-	void rotatecw(Side &top, Side &right, Side &bottom, Side &left);
-	void rotateccw(Side &top, Side &right, Side &bottom, Side &left);
+	void rotate_cw(Side &top, Side &right, Side &bottom, Side &left) override;
+	void rotate_ccw(Side &top, Side &right, Side &bottom, Side &left) override;
 private:
 };
