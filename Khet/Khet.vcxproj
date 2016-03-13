@@ -64,9 +64,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Header.cpp" />
+    <ClInclude Include="Boards.h" />
+    <ClInclude Include="Cells.h" />
+    <ClInclude Include="Pieces.cpp" />
+    <ClInclude Include="Pieces.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Boards.cpp" />
+    <ClCompile Include="Cells.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

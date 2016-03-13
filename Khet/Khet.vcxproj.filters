@@ -16,12 +16,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Boards.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cells.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.cpp">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="Pieces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Boards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cells.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pieces.cpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

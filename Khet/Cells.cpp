@@ -29,7 +29,7 @@ Cell::Cell()
 }
 bool Cell::contains_piece() const
 {
-	if (Cell::getPiece == nullptr)
+	if (&getPiece() == nullptr)
 	{
 		return false;
 	} else

@@ -1,3 +1,4 @@
+#pragma once
 #include "Cells.h"
 
 enum class GameType {classic = 0};

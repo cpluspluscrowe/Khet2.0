@@ -1,3 +1,4 @@
+#pragma once
 enum class Type { mirror = 0, unprotected, blocker };
 enum class Reflected { rup = 0, rright, rdown, rleft, rnone };
 enum class Color {red, gray};
@@ -23,17 +24,10 @@ class Piece {
 public:
 	Piece(Color color);
 	Piece();
-	void move(int dy, int dx);
 	bool isHit(int dir);
-	int getxpos() const;
-	int getypos() const;
-	void setRotation(int x);
 	Color getColor() const;
 	void setColor(Color color);
 private:
-	int posx;
-	int posy;
-	int rotation;
 	Color color;
 };
 /*
@@ -74,5 +68,7 @@ class Anubis : public Piece
 {
 public:
 	Anubis(Color color, int rotation);
+	void rotatecw(Side &top, Side &right, Side &bottom, Side &left);
+	void rotateccw(Side &top, Side &right, Side &bottom, Side &left);
 private:
 };

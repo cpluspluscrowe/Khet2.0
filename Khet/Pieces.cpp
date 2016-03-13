@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include "Pieces.h"
 using namespace std;
@@ -20,47 +21,6 @@ void Side::set_reflect_dir(const Reflected &dir)
 {
 	reflect_dir = dir;
 }
-
-/*
-Piece class implementation
-*/
-Piece::Piece()
-{
-	//do nothing, this will be a nullptr in a cell
-}
-Piece::Piece(Color color)
-{
-	setColor(color);
-};
-Color Piece::getColor() const
-{
-	return color;
-}
-void Piece::setColor(Color color)
-{
-	color = color;
-}
-void Piece::move(int dy, int dx)
-{
-	posy += dy;
-	posx += dx;
-};
-bool Piece::isHit(int dir)
-{
-	return true;
-};
-int Piece::getxpos() const
-{
-	return posx;
-};
-int Piece::getypos() const
-{
-	return posy;
-};
-void Piece::setRotation(int x)
-{
-	rotation = x;
-}
 Reflected Side::get_reflect_dir() const
 {
 	return reflect_dir;
@@ -70,15 +30,43 @@ Type Side::get_surface() const
 	return surface;
 }
 
+/*
+Piece class implementation
+*/
+Piece::Piece(Color color)
+{
+	setColor(color);
+};
+Piece::Piece()
+{
+	//do nothing
+};
+Color Piece::getColor() const
+{
+	return color;
+}
+void Piece::setColor(Color color)
+{
+	color = color;
+}
+bool Piece::isHit(int dir)
+{
+	return true;
+};
+
+
+
+
 
 /*
 Scarab class implementation
 */
-Scarab::Scarab(Color color, int rotation) :Piece(color){
+Scarab::Scarab(Color color, int rotation) : Piece(color) {
 	Side top(Type::mirror, Reflected::rright);
 	Side right(Type::mirror, Reflected::rup);
 	Side left(Type::mirror, Reflected::rdown);
 	Side bottom(Type::mirror, Reflected::rleft);
+	setColor(color);
 	if (rotation == 1)
 	{
 		rotate(top, right, bottom, left);
@@ -111,11 +99,12 @@ Reflected Scarab::get_opposite_reflected(Side &current) const
 /*
 Pyramid class implementation
 */
-Pyramid::Pyramid(Color color, int rotation) :Piece(color){
+Pyramid::Pyramid(Color color, int rotation) : Piece(color){
 	Side top(Type::mirror, Reflected::rright);
 	Side right(Type::mirror, Reflected::rup);
 	Side left(Type::unprotected, Reflected::rnone);
 	Side bottom(Type::unprotected, Reflected::rnone);
+	setColor(color);
 	if (rotation == 1)
 	{
 		rotate_cc(top, right, bottom, left);
@@ -189,7 +178,7 @@ void Pyramid::rotate_cw(Side &top, Side &right, Side &bottom, Side &left)
 /*
 Pharaoh class implementation
 */
-Pharaoh::Pharaoh(Color color) :Piece(color){
+Pharaoh::Pharaoh(Color color) : Piece(color){
 	Side top(Type::unprotected, Reflected::rnone);
 	Side right(Type::unprotected, Reflected::rnone);
 	Side left(Type::unprotected, Reflected::rnone);
@@ -199,9 +188,41 @@ Pharaoh::Pharaoh(Color color) :Piece(color){
 /*
 Anubis class implementation
 */
-Anubis::Anubis(Color color, int rotation) :Piece(color){
+Anubis::Anubis(Color color, int rotation) : Piece(color){
 	Side top(Type::blocker, Reflected::rright);
 	Side right(Type::unprotected, Reflected::rup);
 	Side left(Type::unprotected, Reflected::rdown);
 	Side bottom(Type::unprotected, Reflected::rleft);
+	for (int i = 0; i < rotation; i++)
+	{
+		rotatecw(top, right, bottom, left);
+	}
+}
+void Anubis::rotatecw(Side &top, Side &right, Side &bottom, Side &left)
+{
+	if (top.get_surface() == Type::blocker)
+	{
+		top.set_surface(Type::unprotected);
+		right.set_surface(Type::blocker);
+	}
+	else if (right.get_surface() == Type::blocker)
+	{
+		right.set_surface(Type::unprotected);
+		bottom.set_surface(Type::blocker);
+	}
+	else if (bottom.get_surface() == Type::blocker)
+	{
+		bottom.set_surface(Type::unprotected);
+		left.set_surface(Type::blocker);
+	} else //(left.get_surface() == Type::blocker)
+	{
+		left.set_surface(Type::unprotected);
+		top.set_surface(Type::blocker);
+	}
+}
+void Anubis::rotateccw(Side &top, Side &right, Side &bottom, Side &left)
+{
+	rotatecw(top, right, bottom, left);
+	rotatecw(top, right, bottom, left);
+	rotatecw(top, right, bottom, left);
 }
